@@ -73,25 +73,67 @@ class MyScene extends CGFscene {
                     0.0, 0.0, this.scaleFactor, 0.0,
                     0.0, 0.0, 0.0, 1.0];
         this.multMatrix(sca);
+        
+        if(this.displayBigTri)
+            this.tri_big.display();
 
+        this.pushMatrix();
 
-        // ---- BEGIN Primitive drawing section
+        var t = [1,0,0,0,
+                0,1,0,0,
+                0,0,1,0,
+                0,3,0,1];
+        
+        this.multMatrix(t);
+        
+        //draw square
         if(this.displayDiamond)
             this.diamond.display();
         
-        if(this.displayTriangle)
-            this.triangle.display();
-        
-        
-        if(this.displayParal)
-            this.parall.display();
+        this.popMatrix();
+        this.pushMatrix();
+
+        this.translate(-2,1,0);
+        this.rotate(Math.PI,0,0,1);
         
         if(this.displaySmallTri)
             this.tri_small.display();
 
+        this.translate(1,-1,0);
+        
+        if(this.displaySmallTri)
+            this.tri_small.display();
+       
+        
+        this.popMatrix();
+        this.pushMatrix();
+        
+        this.translate(1,0,0);
+        this.rotate(Math.PI,0,0,1);
+        
         if(this.displayBigTri)
             this.tri_big.display();
+        
+        this.popMatrix();
+        this.pushMatrix();
 
+        this.translate(1,-5,0);
+        this.rotate(Math.PI/2,0,0,1);
+
+        if(this.displayTriangle)
+            this.triangle.display();
+        
+        this.popMatrix();
+        this.pushMatrix();
+
+        //this.translate(1,-4,0);
+        this.rotate(Math.PI/2,0,0,1);
+        this.translate(3,1,0);
+        if(this.displayParal)
+            this.parall.display();
+        
+
+        
         
         // ---- END Primitive drawing section
     }
