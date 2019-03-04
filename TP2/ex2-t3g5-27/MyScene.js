@@ -68,11 +68,14 @@ class MyScene extends CGFscene {
                     0.0, 0.0, 0.0, 1.0];
         this.multMatrix(sca);
         
+<<<<<<< HEAD
         this.pushMatrix();
 
         this.translate(4,0,6);
         this.rotate(-Math.PI/2,1,0,0);
         
+=======
+>>>>>>> master
         if(this.displayTangram)
             this.tangram.display(this);
         
@@ -83,6 +86,10 @@ class MyScene extends CGFscene {
             this.cube.display();
             this.popMatrix();
         }
+<<<<<<< HEAD
         this.popMatrix();
+=======
+
+>>>>>>> master
     }
 }
