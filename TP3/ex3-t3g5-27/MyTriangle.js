@@ -15,6 +15,10 @@ class MyTriangle extends CGFobject {
 			0, 1,2,
 			0,2,1
 		];
+		this.normals = [];
+        for (var i = 0; i <= 2 * this.nDivs + 1; i++) {
+            this.normals.push(0, 0, 1);
+        }
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	}

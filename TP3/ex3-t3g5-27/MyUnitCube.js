@@ -34,4 +34,6 @@ class MyUnitCube extends CGFobject {
 		this.initGLBuffers();
 	}
 
+	updateBuffers(){}
+
 }

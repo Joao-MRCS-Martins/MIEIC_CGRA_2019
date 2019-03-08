@@ -10,6 +10,7 @@ class MyScene extends CGFscene {
         super.init(application);
         this.initCameras();
         this.initLights();
+        this.initMaterials();
 
         //Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -21,29 +22,126 @@ class MyScene extends CGFscene {
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
+        this.plane = new MyPlane(this, 5);
+        this.cone = new MyCone(this, 3, 1);
+        this.pyramid = new MyPyramid(this, 3, 1);
         this.tangram = new MyTangram(this);
         this.cube = new MyUnitCube(this);
+        
+        this.objects = [this.plane, this.pyramid, this.cone,this.tangram,this.cube];
 
-        //Objects connected to MyInterface
+        // Labels and ID's for object selection on MyInterface
+        this.objectIDs = { 'Plane': 0 , 'Pyramid': 1, 'Cone': 2,'Tangram':3,'Cube':4};
+
+        //Other variables connected to MyInterface
+        this.selectedObject = 0;
+        this.selectedMaterial = 0;
         this.displayAxis = true;
-        this.scaleFactor = 1;
-        this.displayTangram = true;
-        this.displayCube = true;
+        this.displayNormals = false;
+        this.objectComplexity = 0.5;
+        this.scaleFactor = 2.0;
+        //this.displayTangram = true;
+        //this.displayCube = true;
+
     }
     initLights() {
-        this.lights[0].setPosition(15, 2, 5, 1);
+        this.setGlobalAmbientLight(0.3, 0.3, 0.3, 1.0);
+
+        this.lights[0].setPosition(2.0, 2.0, -1.0, 1.0);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
-        this.lights[0].enable();
+        this.lights[0].setSpecular(1.0, 1.0, 1.0, 1.0);
+        this.lights[0].disable();
+        this.lights[0].setVisible(true);
         this.lights[0].update();
+
+        this.lights[1].setPosition(0.0, -1.0, 2.0, 1.0);
+        this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
+        this.lights[1].setSpecular(1.0, 1.0, 0.0, 1.0);
+        this.lights[1].disable();
+        this.lights[1].setVisible(true);
+        this.lights[1].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(10, 10, 10), vec3.fromValues(0, 0, 0));
     }
-    setDefaultAppearance() {
-        this.setAmbient(0.2, 0.4, 0.8, 1.0);
-        this.setDiffuse(0.2, 0.4, 0.8, 1.0);
-        this.setSpecular(0.2, 0.4, 0.8, 1.0);
-        this.setShininess(10.0);
+
+    hexToRgbA(hex)
+    {
+        var ret;
+        //either we receive a html/css color or a RGB vector
+        if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+            ret=[
+                parseInt(hex.substring(1,3),16).toPrecision()/255.0,
+                parseInt(hex.substring(3,5),16).toPrecision()/255.0,
+                parseInt(hex.substring(5,7),16).toPrecision()/255.0,
+                1.0
+            ];
+        }
+        else
+            ret=[
+                hex[0].toPrecision()/255.0,
+                hex[1].toPrecision()/255.0,
+                hex[2].toPrecision()/255.0,
+                1.0
+            ];
+        return ret;
+    }
+
+    updateCustomMaterial() {
+        var rgba;
+
+        this.customMaterial.setAmbient(...this.hexToRgbA(this.customMaterialValues['Ambient']));
+        this.customMaterial.setDiffuse(...this.hexToRgbA(this.customMaterialValues['Diffuse']));
+        this.customMaterial.setSpecular(...this.hexToRgbA(this.customMaterialValues['Specular']));
+
+        this.customMaterial.setShininess(this.customMaterialValues['Shininess']);
+
+    };
+
+    updateObjectComplexity(){
+        this.objects[this.selectedObject].updateBuffers(this.objectComplexity);
+    }
+
+
+    initMaterials() {
+        // Red Ambient (no diffuse, no specular)
+        this.material1 = new CGFappearance(this);
+        this.material1.setAmbient(1, 0, 0, 1.0);
+        this.material1.setDiffuse(0, 0, 0, 1.0);
+        this.material1.setSpecular(0, 0, 0, 1.0);
+        this.material1.setShininess(10.0);
+
+        // Red Diffuse (no ambient, no specular)
+        this.material2 = new CGFappearance(this);
+        this.material2.setAmbient(0.0, 0.0, 0.0, 1.0);
+        this.material2.setDiffuse(1, 0, 0, 1.0);
+        this.material2.setSpecular(0, 0, 0, 1.0);
+        this.material2.setShininess(10.0);
+
+        // Red Specular (no ambient, no diffuse)
+        this.material3 = new CGFappearance(this);
+        this.material3.setAmbient(0, 0, 0, 1.0);
+        this.material3.setDiffuse(0, 0, 0, 1.0);
+        this.material3.setSpecular(1, 0, 0, 1.0);
+        this.material3.setShininess(10.0);
+
+        // Custom material (can be changed in the interface)
+        // initially midrange values on ambient, diffuse and specular, on R, G and B respectively
+
+        this.customMaterialValues = {
+            'Ambient': '#0000ff',
+            'Diffuse': '#ff0000',
+            'Specular': '#000000',
+            'Shininess': 10
+        }
+        this.customMaterial = new CGFappearance(this);
+
+        this.updateCustomMaterial();
+
+        this.materials = [this.material1, this.material2, this.material3, this.customMaterial];
+
+        // Labels and ID's for object selection on MyInterface
+        this.materialIDs = {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Custom': 3 };
     }
     display() {
         // ---- BEGIN Background, camera and axis setup
@@ -56,18 +154,20 @@ class MyScene extends CGFscene {
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
         
+        this.lights[0].update();
+        this.lights[1].update();
+
         // Draw axis
         if (this.displayAxis)
             this.axis.display();
 
-        this.setDefaultAppearance();
+        // ---- BEGIN Primitive drawing section
 
-        var sca = [this.scaleFactor, 0.0, 0.0, 0.0,
-                    0.0, this.scaleFactor, 0.0, 0.0,
-                    0.0, 0.0, this.scaleFactor, 0.0,
-                    0.0, 0.0, 0.0, 1.0];
-        this.multMatrix(sca);
-        
+        this.materials[this.selectedMaterial].apply();
+
+        this.pushMatrix();
+        this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
+        /*
         this.pushMatrix();
 
         this.translate(4,0,6);
@@ -84,5 +184,14 @@ class MyScene extends CGFscene {
             this.popMatrix();
         }
         this.popMatrix();
+        */
+        if (this.displayNormals)
+            this.objects[this.selectedObject].enableNormalViz();
+        else
+            this.objects[this.selectedObject].disableNormalViz();
+        
+        this.objects[this.selectedObject].display();
+        this.popMatrix();
+        // ---- END Primitive drawing section
     }
 }
