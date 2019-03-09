@@ -40,8 +40,6 @@ class MyScene extends CGFscene {
         this.displayNormals = false;
         this.objectComplexity = 0.5;
         this.scaleFactor = 2.0;
-        //this.displayTangram = true;
-        //this.displayCube = true;
 
     }
     initLights() {
@@ -125,6 +123,13 @@ class MyScene extends CGFscene {
         this.material3.setSpecular(1, 0, 0, 1.0);
         this.material3.setShininess(10.0);
 
+        //Wood 
+        this.wood = new CGFappearance(this);
+        this.wood.setAmbient(130/255,70/255,40/255,1);
+        this.wood.setDiffuse(130/255,70/255,40/255,1);
+        this.wood.setSpecular(130/255,70/255,40/255,0.1);
+        this.wood.setShininess(10.0);
+
         // Custom material (can be changed in the interface)
         // initially midrange values on ambient, diffuse and specular, on R, G and B respectively
 
@@ -138,10 +143,10 @@ class MyScene extends CGFscene {
 
         this.updateCustomMaterial();
 
-        this.materials = [this.material1, this.material2, this.material3, this.customMaterial];
+        this.materials = [this.material1, this.material2, this.material3, this.customMaterial,this.wood];
 
         // Labels and ID's for object selection on MyInterface
-        this.materialIDs = {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Custom': 3 };
+        this.materialIDs = {'Red Ambient': 0, 'Red Diffuse': 1, 'Red Specular': 2, 'Custom': 3 ,'Wood': 4};
     }
     display() {
         // ---- BEGIN Background, camera and axis setup
@@ -167,30 +172,14 @@ class MyScene extends CGFscene {
 
         this.pushMatrix();
         this.scale(this.scaleFactor,this.scaleFactor,this.scaleFactor);
-        /*
-        this.pushMatrix();
-
-        this.translate(4,0,6);
-        this.rotate(-Math.PI/2,1,0,0);
         
-        if(this.displayTangram)
-            this.tangram.display(this);
-        
-        if(this.displayCube) {
-            this.pushMatrix();
-            this.scale(8,12,1.5);
-            this.translate(0,0,-0.6);
-            this.cube.display();
-            this.popMatrix();
-        }
-        this.popMatrix();
-        */
         if (this.displayNormals)
             this.objects[this.selectedObject].enableNormalViz();
         else
             this.objects[this.selectedObject].disableNormalViz();
         
         this.objects[this.selectedObject].display();
+
         this.popMatrix();
         // ---- END Primitive drawing section
     }
