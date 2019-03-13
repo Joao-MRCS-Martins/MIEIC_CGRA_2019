@@ -81,7 +81,15 @@ class MyTangram extends CGFobject {
                 this.scene.multMatrix(t);
 
                 //display diamond
-                this.green.apply();
+                if(this.scene.selectedMaterial == 3){
+                        this.scene.materials[3].apply();
+                }
+                else{
+                        this.green.apply();
+
+                }
+
+
                 this.diamond.display();
 
                 this.scene.popMatrix();
