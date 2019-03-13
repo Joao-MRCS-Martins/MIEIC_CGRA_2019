@@ -1,0 +1,43 @@
+this.green = new CGFappearance(this);
+        this.green.setAmbient(0, 1, 0, 1.0);
+        this.green.setDiffuse(0, 1, 0, 1.0);
+        this.green.setSpecular(0, 1, 0, 1.0);
+        this.green.setShininess(10.0);
+
+
+this.blue = new CGFappearance(this);
+        this.blue.setAmbient(0, 144/255, 1, 1.0);
+        this.blue.setDiffuse(0, 144/255, 1, 1.0);
+        this.blue.setSpecular(0, 144/255, 1, 1.0);
+        this.blue.setShininess(10.0);
+
+this.orange = new CGFappearance(this);
+        this.blue.setAmbient(1, 144/255, 0, 1.0);
+        this.blue.setDiffuse(1, 144/255, 0, 1.0);
+        this.blue.setSpecular(1, 144/255, 0, 1.0);
+        this.blue.setShininess(10.0);
+
+this.yellow = new CGFappearance(this);
+        this.blue.setAmbient(1, 1, 0, 1.0);
+        this.blue.setDiffuse(1, 1, 0, 1.0);
+        this.blue.setSpecular(1, 1, 0, 1.0);
+        this.blue.setShininess(10.0);   
+
+this.pink = new CGFappearance(this);
+        this.pink.setAmbient(1, 144/255, 216/255, 1.0);
+        this.pink.setDiffuse(1, 144/255, 216/255, 1.0);
+        this.pink.setSpecular(1, 144/255, 216/255, 1.0);
+        this.pink.setShininess(10.0);
+
+this.darkPink = new CGFappearance(this);
+        this.darkPink.setAmbient(168/255, 72/255,192/255, 1.0);
+        this.darkPink.setDiffuse(168/255, 72/255,192/255, 1.0);
+        this.darkPink.setSpecular(168/255, 72/255,192/255, 1.0);
+        this.darkPink.setShininess(10.0);   
+
+this.red = new CGFappearance(this);
+        this.red.setAmbient(1, 24/255,24/255, 1.0);
+        this.red.setDiffuse(1, 24/255,24/255, 1.0);
+        this.red.setSpecular(1, 24/255,24/255, 1.0);
+        this.red.setShininess(10.0);   
+
