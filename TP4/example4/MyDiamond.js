@@ -6,9 +6,7 @@
 class MyDiamond extends CGFobject {
 	constructor(scene) {
 		super(scene);
-		this.scene = scene;
 		this.initBuffers();
-		
 	}
 	initBuffers() {
 		this.vertices = [
@@ -39,14 +37,6 @@ class MyDiamond extends CGFobject {
 		for(var i = 0; i< 4;i++) {
 			this.normals.push(0,0,-1);
 		}
-
-		this.texCoords = [0.0, 0.0,
-						1.0, 0.0, 0.0, 1.0, 1.0, 1.0,0.0, 0.0,
-						1.0, 0.0, 0.0, 1.0, 1.0, 1.0,];
-
-
-
-
 		this.primitiveType = this.scene.gl.TRIANGLES;
 		this.initGLBuffers();
 	}

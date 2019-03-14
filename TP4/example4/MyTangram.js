@@ -13,7 +13,6 @@ class MyTangram extends CGFobject {
                 this.parall = new MyParallelogram(scene);
                 this.scene = scene;
 
-
                 this.green = new CGFappearance(this.scene);
                 this.green.setAmbient(0, 1, 0, 1.0);
                 this.green.setDiffuse(0, 1, 0, 1.0);
@@ -57,13 +56,16 @@ class MyTangram extends CGFobject {
                 this.red.setSpecular(1, 24 / 255, 24 / 255, 1.0);
                 this.red.setShininess(10.0);
 
-                this.tantext = new CGFappearance(this.scene);
-                this.tantext.loadtexture('images/tangram.png')
-               /* this.tantext.setAmbient(0.1, 0.1, 0.1, 1);
-                this.tantext.setDiffuse(0.9, 0.9, 0.9, 1);
-                this.tantext.setSpecular(0.1, 0.1, 0.1, 1);
-                this.tantext.setShininess(10.0);*/
-                this.tantext.setTextureWrap('REPEAT', 'REPEAT');
+        
+                // TANGRAM MATERIAL
+                this.tanmat = new CGFappearance(this.scene);
+                this.tanmat.setAmbient(0.1, 0.1, 0.1, 1);
+                this.tanmat.setDiffuse(0.9, 0.9, 0.9, 1);
+                this.tanmat.setSpecular(0.1, 0.1, 0.1, 1);
+                this.tanmat.setShininess(10.0);
+                this.tanmat.loadTexture('images/tangram.png');
+                this.tanmat.setTextureWrap('REPEAT', 'REPEAT');
+                
         }
 
 
@@ -71,86 +73,79 @@ class MyTangram extends CGFobject {
 
         display() {
 
-                //display big triangle (no transformations needed)
-                this.blue.apply();
-                this.tri_big.display();
-
-                this.scene.pushMatrix();
-
-                //transformation for diamond
-                var t = [1, 0, 0, 0,
-                        0, 1, 0, 0,
-                        0, 0, 1, 0,
-                        0, 3, 0, 1
-                ];
-
-                this.scene.multMatrix(t);
-
-                //display diamond
-                /*if(this.scene.selectedMaterial == 3){
-                        this.scene.materials[3].apply();
-                }
-                else{
-                        this.green.apply();
-
-                }*/
-
-                this.tantext.apply();
+                 //display big triangle (no transformations needed)
+                 //this.blue.apply();
+                 this.tri_big.display();
+ 
+                 this.scene.pushMatrix();
+ 
+                 //transformation for diamond
+                 var t = [1, 0, 0, 0,
+                         0, 1, 0, 0,
+                         0, 0, 1, 0,
+                         0, 3, 0, 1
+                 ];
+ 
+                 this.scene.multMatrix(t);
+ 
+                 //this.green.apply();
+                
+                this.tanmat.apply();
                 this.diamond.display();
-
-                this.scene.popMatrix();
-                this.scene.pushMatrix();
-
-                //transformations for small triangle
-                this.scene.translate(-2, 1, 0);
-                this.scene.rotate(Math.PI, 0, 0, 1);
-
-                //display small triangle
-                this.darkPink.apply();
-                this.tri_small.display();
-
-                //transformation for 2nd small triangle
-                this.scene.translate(1, -1, 0);
-
-                //display 2nd small triangle
-                this.red.apply();
-                this.tri_small.display();
-
-
-                this.scene.popMatrix();
-                this.scene.pushMatrix();
-
-                //transformations for 2nd big triangle
-                this.scene.translate(1, 0, 0);
-                this.scene.rotate(Math.PI, 0, 0, 1);
-
-                //display 2nd big triangle
-                this.orange.apply();
-                this.tri_big.display();
-
-                this.scene.popMatrix();
-                this.scene.pushMatrix();
-
-                //transformations for normal triangle
-                this.scene.translate(1, -4, 0);
-                this.scene.rotate(Math.PI / 2, 0, 0, 1);
-
-                //display normal triangle
-                this.pink.apply();
-                this.triangle.display();
-
-                this.scene.popMatrix();
-                this.scene.pushMatrix();
-
-                //transformations for parallelogram
-                this.scene.translate(1, -4, 0);
-                this.scene.rotate(Math.PI / 2, 0, 0, 1);
-                this.scene.rotate(Math.PI, 1, 0, 0);
-                //display parallelogram
-                this.yellow.apply();
-                this.parall.display();
-
-                this.scene.popMatrix();
+ 
+                 this.scene.popMatrix();
+                 this.scene.pushMatrix();
+ 
+                 //transformations for small triangle
+                 this.scene.translate(-2, 1, 0);
+                 this.scene.rotate(Math.PI, 0, 0, 1);
+ 
+                 //display small triangle
+                 this.darkPink.apply();
+                 this.tri_small.display();
+ 
+                 //transformation for 2nd small triangle
+                 this.scene.translate(1, -1, 0);
+ 
+                 //display 2nd small triangle
+                 this.red.apply();
+                 this.tri_small.display();
+ 
+ 
+                 this.scene.popMatrix();
+                 this.scene.pushMatrix();
+ 
+                 //transformations for 2nd big triangle
+                 this.scene.translate(1, 0, 0);
+                 this.scene.rotate(Math.PI, 0, 0, 1);
+ 
+                 //display 2nd big triangle
+                 this.orange.apply();
+                 this.tri_big.display();
+ 
+                 this.scene.popMatrix();
+                 this.scene.pushMatrix();
+ 
+                 //transformations for normal triangle
+                 this.scene.translate(1, -4, 0);
+                 this.scene.rotate(Math.PI / 2, 0, 0, 1);
+ 
+                 //display normal triangle
+                 this.pink.apply();
+                 this.triangle.display();
+ 
+                 this.scene.popMatrix();
+                 this.scene.pushMatrix();
+ 
+                 //transformations for parallelogram
+                 this.scene.translate(1, -4, 0);
+                 this.scene.rotate(Math.PI / 2, 0, 0, 1);
+                 this.scene.rotate(Math.PI, 1, 0, 0);
+                 //display parallelogram
+                 this.yellow.apply();
+                 this.parall.display();
+ 
+                 this.scene.popMatrix();
         }
 
         updateBuffers() {}
