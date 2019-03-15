@@ -75,6 +75,7 @@ class MyTangram extends CGFobject {
 
                  //display big triangle (no transformations needed)
                  //this.blue.apply();
+                 this.tanmat.apply();
                  this.tri_big.display();
  
                  this.scene.pushMatrix();
@@ -90,7 +91,6 @@ class MyTangram extends CGFobject {
  
                  //this.green.apply();
                 
-                this.tanmat.apply();
                 this.diamond.display();
  
                  this.scene.popMatrix();
@@ -101,14 +101,14 @@ class MyTangram extends CGFobject {
                  this.scene.rotate(Math.PI, 0, 0, 1);
  
                  //display small triangle
-                 this.darkPink.apply();
+                 //this.darkPink.apply();
                  this.tri_small.display();
  
                  //transformation for 2nd small triangle
                  this.scene.translate(1, -1, 0);
  
                  //display 2nd small triangle
-                 this.red.apply();
+                 //this.red.apply();
                  this.tri_small.display();
  
  
@@ -120,7 +120,7 @@ class MyTangram extends CGFobject {
                  this.scene.rotate(Math.PI, 0, 0, 1);
  
                  //display 2nd big triangle
-                 this.orange.apply();
+                 //this.orange.apply();
                  this.tri_big.display();
  
                  this.scene.popMatrix();
@@ -131,7 +131,7 @@ class MyTangram extends CGFobject {
                  this.scene.rotate(Math.PI / 2, 0, 0, 1);
  
                  //display normal triangle
-                 this.pink.apply();
+                 //this.pink.apply();
                  this.triangle.display();
  
                  this.scene.popMatrix();
@@ -142,7 +142,7 @@ class MyTangram extends CGFobject {
                  this.scene.rotate(Math.PI / 2, 0, 0, 1);
                  this.scene.rotate(Math.PI, 1, 0, 0);
                  //display parallelogram
-                 this.yellow.apply();
+                 //this.yellow.apply();
                  this.parall.display();
  
                  this.scene.popMatrix();
