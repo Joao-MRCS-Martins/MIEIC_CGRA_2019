@@ -76,6 +76,14 @@ class MyTangram extends CGFobject {
                  //display big triangle (no transformations needed)
                  //this.blue.apply();
                  this.tanmat.apply();
+                 var texCoords =  [0.0, 0.0,
+                        0.5, 0.5,
+                        1.0, 0.0,
+                        0.0, 0.0,
+                        0.5, 0.5,
+                        1.0, 0.0];
+                        
+                this.tri_big.updateTexCoords(texCoords);
                  this.tri_big.display();
  
                  this.scene.pushMatrix();
@@ -102,6 +110,13 @@ class MyTangram extends CGFobject {
  
                  //display small triangle
                  //this.darkPink.apply();
+                 texCoords = [0.0, 0.0,
+                        0.25, 0.25, 
+                        0.0, 0.25, 
+                        0.0, 0.0,
+                        0.25, 0.25, 
+                        0.0, 0.25];
+                 this.tri_small.updateTexCoords(texCoords);
                  this.tri_small.display();
  
                  //transformation for 2nd small triangle
@@ -109,6 +124,13 @@ class MyTangram extends CGFobject {
  
                  //display 2nd small triangle
                  //this.red.apply();
+                 texCoords = [0.25, 0.75,
+                        0.5, 0.5, 
+                        0.75, 0.75, 
+                        0.25, 0.75,
+                        0.5, 0.5, 
+                        0.75, 0.75];
+                 this.tri_small.updateTexCoords(texCoords);
                  this.tri_small.display();
  
  
@@ -121,7 +143,14 @@ class MyTangram extends CGFobject {
  
                  //display 2nd big triangle
                  //this.orange.apply();
-                 this.tri_big.display();
+                 texCoords = [1.0, 0.0,
+                        0.5, 0.5,
+                        1.0, 1.0,
+                        1.0, 0.0,
+                        0.5, 0.5,
+                        1.0, 1.0];
+                this.tri_big.updateTexCoords(texCoords);
+                this.tri_big.display();
  
                  this.scene.popMatrix();
                  this.scene.pushMatrix();
