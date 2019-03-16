@@ -27,21 +27,21 @@ class MyParallelogram extends CGFobject {
 		this.normals = [];
 		
 		for (var i = 0; i < 4; i++) {
-            this.normals.push(0, 0, 1);
+            this.normals.push(0, 0, -1);
 		}
 		
 		for(var i = 0; i< 4;i++) {
-			this.normals.push(0,0,-1);
+			this.normals.push(0,0,1);
 		}
 
-		this.texCoords = [0.0, 0.0,
-						  0.0, -1.0,
-						  -1.0, 0.0, 
-						  -1.0, -1.0,
+		this.texCoords = [1.0, 0.0,
 						  0.0, 0.0,
-						  0.0, -1.0,
-						  -1.0, 0.0, 
-						  -1.0, -1.0
+						  1.0, 1.0, 
+						  0.0, 1.0,
+						  1.0, 0.0,
+						  0.0, 0.0,
+						  1.0, 1.0, 
+						  0.0, 1.0
 						];
 
 		this.primitiveType = this.scene.gl.TRIANGLES;
