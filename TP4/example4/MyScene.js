@@ -1,25 +1,26 @@
 /**
-* MyScene
-* @constructor
-*/
+ * MyScene
+ * @constructor
+ */
 class MyScene extends CGFscene {
     constructor() {
         super();
     }
-
+    
     init(application) {
         super.init(application);
         this.initCameras();
         this.initLights();
-
+        
         //Background color
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
-
+        
         this.gl.clearDepth(100.0);
         this.gl.enable(this.gl.DEPTH_TEST);
         this.gl.enable(this.gl.CULL_FACE);
         this.gl.depthFunc(this.gl.LEQUAL);
         this.enableTextures(true);
+        //sthis.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MAG_FILTER, this.gl.NEAREST);
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
@@ -102,6 +103,7 @@ class MyScene extends CGFscene {
         // Clear image and depth buffer everytime we update the scene
         this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
         this.gl.clear(this.gl.COLOR_BUFFER_BIT | this.gl.DEPTH_BUFFER_BIT);
+        
         // Initialize Model-View matrix as identity (no transformation
         this.updateProjectionMatrix();
         this.loadIdentity();
@@ -116,8 +118,8 @@ class MyScene extends CGFscene {
 
         this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
 
-       this.quadMaterial.apply();
-      // this.tangram.display();
+      // this.quadMaterial.apply();
+       this.tangram.display();
        this.cube.display();
     }
 }

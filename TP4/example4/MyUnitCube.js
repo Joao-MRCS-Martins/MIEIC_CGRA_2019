@@ -39,6 +39,7 @@ class MyUnitCube extends CGFobject {
 
     display() {
         this.sideTex.apply();
+        this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
         this.scene.pushMatrix();
         this.scene.translate(0,0,0.5);
         this.front.display();
@@ -63,16 +64,16 @@ class MyUnitCube extends CGFobject {
         this.right.display();
         this.scene.popMatrix();
 
-
         this.topTex.apply();
+        this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
         this.scene.pushMatrix();
         this.scene.translate(0,0.5,0);
         this.scene.rotate(-Math.PI/2,1,0,0);
         this.top.display();
         this.scene.popMatrix();
         
-
         this.bottomTex.apply();
+        this.scene.gl.texParameteri(this.scene.gl.TEXTURE_2D, this.scene.gl.TEXTURE_MAG_FILTER, this.scene.gl.NEAREST);
         this.scene.pushMatrix();
         this.scene.translate(0,-0.5,0);
         this.scene.rotate(Math.PI/2,1,0,0);
