@@ -118,7 +118,7 @@ class MyScene extends CGFscene {
 
         this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
 
-      // this.quadMaterial.apply();
+       this.quadMaterial.apply();
        this.tangram.display();
        this.cube.display();
     }
