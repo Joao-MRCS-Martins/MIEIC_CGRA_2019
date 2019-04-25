@@ -51,11 +51,23 @@ class ShaderScene extends CGFscene {
 		this.appearance.setSpecular(0.0, 0.0, 0.0, 1);
 		this.appearance.setShininess(120);
 
+		
+		this.water = new CGFappearance(this);
+		this.water.setAmbient(0.3, 0.3, 0.3, 1);
+		this.water.setDiffuse(0.7, 0.7, 0.7, 1);
+		this.water.setSpecular(0.0, 0.0, 0.0, 1);
+		this.water.setShininess(120);
+
 		this.texture = new CGFtexture(this, "textures/texture.jpg");
 		this.appearance.setTexture(this.texture);
 		this.appearance.setTextureWrap('REPEAT', 'REPEAT');
 
 		this.texture2 = new CGFtexture(this, "textures/FEUP.jpg");
+
+		this.waterTex = new CGFtexture(this, "textures/waterTex.jpg");
+		this.waterMap = new CGFtexture(this,"textures/waterMap.jpg");
+		this.water.setTexture(this.waterTex);
+
 
 		// shaders initialization
 
@@ -68,7 +80,8 @@ class ShaderScene extends CGFscene {
 			new CGFshader(this.gl, "shaders/texture3.vert", "shaders/texture3.frag"),
 			new CGFshader(this.gl, "shaders/texture3anim.vert", "shaders/texture3anim.frag"),
 			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/sepia.frag"),
-			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/convolution.frag")
+			new CGFshader(this.gl, "shaders/texture1.vert", "shaders/convolution.frag"),
+			new CGFshader(this.gl, "shaders/water.vert","shaders/water.frag"),
 		];
 
 		// additional texture will have to be bound to texture unit 1 later, when using the shader, with "this.texture2.bind(1);"
@@ -89,7 +102,8 @@ class ShaderScene extends CGFscene {
 			'Multiple textures in VS and FS': 5,
 			'Animation example': 6,
 			'Sepia': 7,
-			'Convolution': 8
+			'Convolution': 8,
+			'Water' : 9
 		};
 
 		// shader code panels references
@@ -208,6 +222,7 @@ class ShaderScene extends CGFscene {
 		//this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.REPEAT);
 		//this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.REPEAT);
 
+
 		if (this.selectedObject==0) {
 			// teapot (scaled and rotated to conform to our axis)
 
@@ -221,8 +236,9 @@ class ShaderScene extends CGFscene {
 			this.popMatrix();
 		}
 		else {
+			this.water.apply();
 			this.pushMatrix();
-			
+
 			this.scale(25, 25, 25);
 			this.objects[1].display();
 			
