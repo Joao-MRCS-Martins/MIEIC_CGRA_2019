@@ -92,7 +92,7 @@ class ShaderScene extends CGFscene {
 		this.testShaders[5].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[6].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[6].setUniformsValues({ timeFactor: 0 });
-		this.testShaders[9].setUniformsValues({ timeFactor: 0,uSampler2: 1});
+		this.testShaders[9].setUniformsValues({ timeFactor: 0,uSampler2: 2});
 
 
 		// Shaders interface variables
@@ -190,10 +190,8 @@ class ShaderScene extends CGFscene {
 	// called periodically (as per setUpdatePeriod() in init())
 	update(t) {
 		// only shader 6 is using time factor
-		if (this.selectedExampleShader == 6)
-			this.testShaders[6].setUniformsValues({ timeFactor: t / 100 % 1000 });
-		if(this.selectedExampleShader == 9)
-			this.testShaders[9].setUniformsValues({timeFactor:t / 100 % 20})
+		if (this.selectedExampleShader == 6 || this.selectedExampleShader == 9 )
+			this.testShaders[this.selectedExampleShader].setUniformsValues({ timeFactor: t / 100 % 2000 });
 	}
 
 	// main display function
@@ -225,10 +223,11 @@ class ShaderScene extends CGFscene {
 
 		// bind additional texture to texture unit 1
 		this.texture2.bind(1);
-		this.waterMap.bind(1);
+		this.waterMap.bind(2);
 		//Uncomment following lines in case texture must have wrapping mode 'REPEAT'
 		this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.REPEAT);
 		this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.REPEAT);
+		
 
 
 		if (this.selectedObject==0) {
@@ -244,7 +243,12 @@ class ShaderScene extends CGFscene {
 			this.popMatrix();
 		}
 		else {
-			this.water.apply();
+			//if the water shader is selected otherwise, go FEUP!
+			if(this.selectedExampleShader == 9)
+				this.water.apply();
+			else
+				this.appearance.apply();
+			
 			this.pushMatrix();
 
 			this.scale(25, 25, 25);
