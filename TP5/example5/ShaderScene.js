@@ -10,7 +10,7 @@ class ShaderScene extends CGFscene {
 		this.selectedExampleShader = 0;
 		this.showShaderCode = false;
 
-		this.scaleFactor = 16.0;
+		this.scaleFactor = 1.0;
 	}
 
 	init(application) {
@@ -67,6 +67,7 @@ class ShaderScene extends CGFscene {
 		this.waterTex = new CGFtexture(this, "textures/waterTex.jpg");
 		this.waterMap = new CGFtexture(this,"textures/waterMap.jpg");
 		this.water.setTexture(this.waterTex);
+		this.water.setTextureWrap('REPEAT', 'REPEAT');
 
 
 		// shaders initialization
@@ -91,6 +92,7 @@ class ShaderScene extends CGFscene {
 		this.testShaders[5].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[6].setUniformsValues({ uSampler2: 1 });
 		this.testShaders[6].setUniformsValues({ timeFactor: 0 });
+		this.testShaders[9].setUniformsValues({ timeFactor: 0,uSampler2: 1});
 
 
 		// Shaders interface variables
@@ -190,6 +192,8 @@ class ShaderScene extends CGFscene {
 		// only shader 6 is using time factor
 		if (this.selectedExampleShader == 6)
 			this.testShaders[6].setUniformsValues({ timeFactor: t / 100 % 1000 });
+		if(this.selectedExampleShader == 9)
+			this.testShaders[9].setUniformsValues({timeFactor:t / 100 % 20})
 	}
 
 	// main display function
@@ -221,7 +225,7 @@ class ShaderScene extends CGFscene {
 
 		// bind additional texture to texture unit 1
 		this.texture2.bind(1);
-
+		this.waterMap.bind(1);
 		//Uncomment following lines in case texture must have wrapping mode 'REPEAT'
 		//this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.REPEAT);
 		//this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.REPEAT);
