@@ -14,11 +14,12 @@ uniform float timeFactor;
 
 void main() {
 	float directionalOffset = timeFactor * 0.01;
+	float stretchFactor = 0.5;
 
-    vec4 offset = texture2D(uSampler2, aTextureCoord*vec2(0.5, 0.5)+vec2(directionalOffset*normScale, directionalOffset*normScale));
+    vec4 offset = texture2D(uSampler2, aTextureCoord*vec2(stretchFactor, stretchFactor)+vec2(directionalOffset*normScale, directionalOffset*normScale));
 
 
-	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition.x, aVertexPosition.y, aVertexPosition.z+offset.z*0.1, 1.0);
+	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition.x, aVertexPosition.y, aVertexPosition.z+offset.z*0.1*normScale, 1.0);
 	vTextureCoord = aTextureCoord;
 }
 
