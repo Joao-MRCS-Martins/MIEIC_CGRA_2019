@@ -22,8 +22,14 @@ class MyScene extends CGFscene {
 
         //Objects connected to MyInterface
         this.axiom = "F--F--F"; // "X"; //
-        this.ruleF = "F+F--F+F"; // "FF"; //
+        //this.ruleF = "F+F--F+F"; // "FF"; //
+        this.ruleF = "FF";
         //this.ruleX = "F[-X][X]F[-X]+FX";
+        this.ruleX = "F[-X][X]F[-X]+X";
+        this.ruleXX = "F[-X][X]+X";
+        this.ruleXXX = "F[+X]-X";
+
+
         this.angle = 60.0;
         this.iterations = 2;
         this.scaleFactor = 1;
@@ -34,7 +40,9 @@ class MyScene extends CGFscene {
                 this.axiom,
                 {
                     "F": [ this.ruleF ],
-                    "X": [ this.ruleX ]
+                    "X": [ this.ruleX ],
+                    "X": [ this.ruleXX],
+                    "X": [ this.ruleXXX],
                 },
                 this.angle,
                 this.iterations,
