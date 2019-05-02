@@ -21,19 +21,13 @@ class MyScene extends CGFscene {
         this.enableTextures(true);
 
         //Objects connected to MyInterface
-        this.axiom = "F--F--F"; // "X"; //
-        //this.ruleF = "F+F--F+F"; // "FF"; //
-        this.ruleF = "FF";
-        //this.ruleX = "F[-X][X]F[-X]+FX";
-        this.ruleX = "F[-X][X]F[-X]+X";
-        this.ruleXX = "F[-X][X]+X";
-        this.ruleXXX = "F[+X]-X";
-
-
-        this.angle = 60.0;
-        this.iterations = 2;
-        this.scaleFactor = 1;
-        this.lSystem = new MyLSystem(this);
+        this.axiom = "X"; //
+        this.ruleF = "FF"; //
+        this.ruleX = "F[-X][X]F[-X]+FX";
+        this.angle = 30.0;
+        this.iterations = 4;
+        this.scaleFactor = 0.5;
+        this.lSystem = new MyLSPlant(this);
 
         this.doGenerate = function () {
             this.lSystem.generate(
@@ -52,10 +46,11 @@ class MyScene extends CGFscene {
 
         // do initial generation
         this.doGenerate();
-
+        
         //Initialize scene objects
         this.axis = new CGFaxis(this);
         
+        this.leaf = new MyLeaf(this);
     }
 
     initLights() {
@@ -90,9 +85,8 @@ class MyScene extends CGFscene {
         this.setDefaultAppearance();
 
         // ---- BEGIN Primitive drawing section
-
         this.lSystem.display();
-
+        //this.leaf.display();
         // ---- END Primitive drawing section
     }
 }
