@@ -24,7 +24,7 @@ class MyLSystem extends CGFobject {
     }
 
 
-    // gera o sistema L com os parâmetros atuais da cena
+    // gera o sistema L com os parï¿½metros atuais da cena
     generate(_axiom, _productions, _angle, _iterations, _scale){
         // copia o axioma da cena para iniciar a sequÃªncia de desenvolvimento
         this.axiom = _axiom;
@@ -104,7 +104,22 @@ class MyLSystem extends CGFobject {
                     // pop
                     this.scene.popMatrix();
                     break;
-
+                case "'\'":
+                    // rodar no sentido positivo eixo dos XX
+                    this.scene.rotate(this.angle,1,0,0);
+                    break;
+                case "/":
+                    //rodar no sentido negativo no eixo dos XX
+                    this.scene.rotate(-this.angle,1,0,0);
+                    break;
+                case "^":
+                    //rodar no sentido positivo no eixo dos YY
+                    this.scene.rotate(this.angle,0,1,0);
+                    break;
+                case "&":
+                    //rodar no sentido negativo no eixo dos YY
+                    this.scene.rotate(-this.angle,0,1,0);
+                    break;
                 // processa primitiva definida na gramatica, se existir
                 default:
                     var primitive=this.grammar[this.axiom[i]];
