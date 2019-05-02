@@ -104,7 +104,7 @@ class MyLSystem extends CGFobject {
                     // pop
                     this.scene.popMatrix();
                     break;
-                case "'\'":
+                case "\\":
                     // rodar no sentido positivo eixo dos XX
                     this.scene.rotate(this.angle,1,0,0);
                     break;

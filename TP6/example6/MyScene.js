@@ -29,9 +29,16 @@ class MyScene extends CGFscene {
         this.scaleFactor = 0.5;
         this.lSystem = new MyLSPlant(this);
 
-        this.ruleX  ="F[-X][X]F[-X]+X";
-        this.ruleXX ="F[-X][X]+X";
-        this.ruleXXX ="F[+X]-X";
+        this.ruleI  ="F[-X][X]F[-X]+X";
+        this.ruleII ="F[-X][X]+X";
+        this.ruleIII ="F[+X]-X";
+        this.ruleIV = "F[+X]-X";
+        this.ruleV = "F[/X][X]F[\\\\X]+X";
+        this.ruleVI = "F[\\X][X]/X";
+        this.ruleVII = "F[/X]\\X";
+        this.ruleVIII = "F[^X][X]F[&X]^X";
+        this.ruleIX = "F[^x]&X";
+        this.ruleX = "F[&X]^X";
 
 
         this.doGenerate = function () {
@@ -39,7 +46,7 @@ class MyScene extends CGFscene {
                 this.axiom,
                 {
                     "F": [ this.ruleF ],
-                    "X": [ this.ruleX,this.ruleXX,this.ruleXXX],
+                    "X": [ this.ruleI,this.ruleII,this.ruleIII,this.ruleIV,this.ruleV,this.ruleVI,this.ruleVII,this.ruleVIII,this.ruleIX,this.ruleX],
                 },
                 this.angle,
                 this.iterations,
