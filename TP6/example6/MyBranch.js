@@ -4,9 +4,8 @@ class MyBranch {
 
         //trunk material
         this.woodAppearance = new CGFappearance(scene);
-        this.woodAppearance.setDiffuse(0.8,0.7,0,1);
-        this.woodAppearance.setSpecular(0.2,0.1,0,1);
-        this.woodAppearance.setShininess(15);
+        this.woodAppearance.setDiffuse(168/255,120/255,0,1);
+        this.woodAppearance.setShininess(80);
     }
 
     display() {

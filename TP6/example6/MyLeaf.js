@@ -1,11 +1,11 @@
 class MyLeaf {
     constructor(scene) {
-        this.leaf = new MyCone(scene,3);
+        this.leaf = new MyDiamond(scene);
 
         //green material
         this.green = new CGFappearance(scene);
-        this.green.setDiffuse(0,.8,0,1);
-        this.green.setSpecular(0,0.2,0,1);
+        this.green.setDiffuse(0,100/255,0,1);
+        this.green.setSpecular(0,50/255,0,1);
         this.green.setShininess(15);
     }
 
